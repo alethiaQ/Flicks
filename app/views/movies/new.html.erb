@@ -1,0 +1,23 @@
+<h1> New Movie </h1>
+
+<div>
+    <%= form_for(@movie) do |m| %>
+        <%= m.label "Title" %>
+        <%= m.text_field :title%><br><br>
+         <%= m.label "Description" %>
+        <%= m.text_area :description %><br>
+        <%= m.label "Trailer" %>
+        <%= m.text_field :preview %><br>
+        <%= m.label "Actors" %>
+        <%= m.text_field :actors %><br>
+        <%= m.label "Director" %>
+        <%= m.text_field :director %><br>
+        <%= m.label "Release Date" %>
+        <%= m.text_field :release_date %><br>
+        <%= m.collection_check_boxes :genres, Genre.all, :id, :name, {:selected => @movie.genres.map(&:id)}, {multiple: true} %><br>
+        <%= m.submit %>
+     <%end%>
+
+
+
+</div>

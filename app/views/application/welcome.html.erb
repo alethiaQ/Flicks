@@ -1,0 +1,11 @@
+<h1>Welcome to Flicks</h1>
+<p>New User? <%= link_to(controller: 'users', action: 'new') %></p>
+<p>Log in <%= link_to(controller: 'sessions', action: 'new') %></p>
+<% if session[:user_id] %>
+  <h1><%= @user.name %></h1>
+  <h2>Email: <%= @user.email %></h2>
+  <h2>Facebook UID: <%= @user.uid %></h2>
+  <img src="<%= @user.image %>">
+<% else %>
+  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
+<% end %>
