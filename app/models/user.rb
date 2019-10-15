@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_secure_password
   has_many :genres
   has_many :movies, through: :genres
-  validates :name, :email, :password, presence: true
+  validates :name, :email, presence: true
   validates :email, uniqueness: true
 
   def set_default_role

@@ -19,6 +19,7 @@ class MoviesController < ApplicationController
     params[:movie][:genres].each do |genre|
       if !genre.empty?
         @movie.movies_genres.build(:genre_id => genre)
+        @movie.save
       end
     end
     if @movie.save
@@ -31,11 +32,12 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :description, :preview, :actors, :directors, :movies_genres_attributes => [:id, :genre_ids => []])
+    params.require(:movie).permit(:title, :description, :preview, :actors, :directors, :genres, :movies_genres_attributes => [:id, :genre_ids => []])
   end
 
   def admin_only
-    unless current_user.admin?
+    unless current_user.role == "admin"
+      raise params.inspect
       redirect_to root_path, :alert => "Access denied."
     end
   end

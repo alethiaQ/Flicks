@@ -1,6 +1,7 @@
 <h1>Movie</h1>
 
 <h3>Title:<%= @movie.title %></h3>
+<%= raise params.inspect%>
 <div>
     <% @movie.genres.each do |genre|  %>
    Genre: <%= genre.name %>
