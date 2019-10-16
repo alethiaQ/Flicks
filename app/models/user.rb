@@ -12,6 +12,14 @@ class User < ActiveRecord::Base
     self.role ||= :user
   end
 
+  def build_user_genres(params)
+    params[:user][:genres].each do |genre|
+      if !genre.empty?
+        @user.user_genres.build(:genre_id => genre)
+      end
+    end
+  end
+
   def self.find_or_create_by_omniauth(auth)
     self.where(email: auth["info"]["email"]).first_or_create do |user|
       user.name = auth["info"]["name"]

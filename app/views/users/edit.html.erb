@@ -1,0 +1,13 @@
+<%= form_for @user do |f| %>
+    <h2>Edit your genre selection: </h2>
+
+    <div>
+        <% @genres.each do |genre| %>
+            <%= check_box_tag "user[genres][]", genre.id, @user.genres.include?(genre.id) %>
+        <%= genre.name%><br>
+        <%end%>
+  
+    </div>
+
+  <%= f.submit "submit" %>
+<% end %>
