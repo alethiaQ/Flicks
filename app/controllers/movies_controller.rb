@@ -32,12 +32,11 @@ class MoviesController < ApplicationController
   private
 
   def movie_params
-    params.require(:movie).permit(:title, :description, :preview, :actors, :directors, :genres, :movies_genres_attributes => [:id, :genre_ids => []])
+    params.require(:movie).permit(:title, :description, :preview, :actors, :directors, :genres)
   end
 
   def admin_only
     unless current_user.role == "admin"
-      raise params.inspect
       redirect_to root_path, :alert => "Access denied."
     end
   end
