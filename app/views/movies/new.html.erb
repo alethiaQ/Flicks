@@ -14,7 +14,7 @@
         <%= m.text_field :director %><br>
         <%= m.label "Release Date" %>
         <%= m.text_field :release_date %><br>
-        <% Genre.all.each do |genre| %>
+        <% @genres.each do |genre| %>
             <%= check_box_tag "movie[genres][]", genre.id, @movie.genres.include?(genre.id) %>
             <%= genre.name%><br>
             <%end%>

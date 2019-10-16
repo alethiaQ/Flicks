@@ -1,16 +1,24 @@
   
 <%= form_for @user do |f| %>
-<%= link_to('Log in with Facebook!', '/auth/facebook') %>
+  <%= link_to('Log in with Facebook!', '/auth/facebook') %>
   <div><%= f.label :name %>
-  <%= f.text_field :name %> <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %><br>
-  <%= f.label :password %>
-  <%= f.password_field :password %><br>
+    <%= f.text_field :name %> <br>
+    <%= f.label :email %>
+    <%= f.text_field :email %><br>
+    <%= f.label :password %>
+    <%= f.password_field :password %><br>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %><br>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %><br>
+  </div>
+  <h4>Select your favorite Movie Genres </h4>
+  <div>
+    <% @genres.each do |genre| %>
+      <%= check_box_tag "user[genres][]", genre.id, @user.genres.include?(genre.id) %>
+      <%= genre.name%><br>
+    <%end%>
+  
+  </div>
 
   <%= f.submit "create" %>
 <% end %>
-</div>

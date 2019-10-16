@@ -1,9 +1,9 @@
 <h1> All movies </h1>
 
 
-<%= @movies.each do |movie| %>
+<% @movies.each do |movie| %>
 <li>
-<%= link_to movie.title, movie_path(movie) %><%= movie.preview %>
+<%= link_to movie.title, movie_path(movie) %> <%= movie.preview %>
 <%end%>
 </li>
 

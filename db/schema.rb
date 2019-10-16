@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_12_231932) do
+ActiveRecord::Schema.define(version: 2019_10_16_182444) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
@@ -32,6 +32,13 @@ ActiveRecord::Schema.define(version: 2019_10_12_231932) do
     t.index ["movie_id"], name: "index_movies_genres_on_movie_id"
   end
 
+  create_table "user_genres", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "genre_id", null: false
+    t.index ["genre_id"], name: "index_user_genres_on_genre_id"
+    t.index ["user_id"], name: "index_user_genres_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -44,4 +51,6 @@ ActiveRecord::Schema.define(version: 2019_10_12_231932) do
 
   add_foreign_key "movies_genres", "genres"
   add_foreign_key "movies_genres", "movies"
+  add_foreign_key "user_genres", "genres"
+  add_foreign_key "user_genres", "users"
 end
