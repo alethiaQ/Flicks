@@ -1,0 +1,10 @@
+<h2> Movies by Genre </h2>
+<% @genres.each do |g|%>
+   <h4> <%= g.name %> </h4>
+    <ul>
+        <% g.movies.each do |movie| %>
+            <li><%= link_to movie.title, movie_path(movie) %>  <%= movie.release_date %></li> 
+        <%end%>
+
+    </ul>
+<%end%>

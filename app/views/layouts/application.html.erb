@@ -10,6 +10,24 @@
   </head>
 
   <body>
+    <nav>
+      <%= link_to "Home", root_path %>
+      <% if session[:user_id] %>
+        <%= link_to "My Account", user_path(session[:user_id])%>
+        <%= link_to "Movies", movies_path%>
+        <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+          <input type=submit value='logout'>
+        <% end %>
+
+      <% else %>
+        <%= link_to "Sign In", login_path%>
+        <%= link_to "Create Account", new_user_path %>
+      <%end%>
+
+
+    
+    
+    </nav>
   
     <%= yield %>
   </body>

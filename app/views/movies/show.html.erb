@@ -1,10 +1,23 @@
-<h1>Movie</h1>
 
-<h3>Title:<%= @movie.title %></h3>
-<%= raise params.inspect%>
+
+<h1><%= @movie.title %></h1>
+<h2>In theaters <%= @movie.release_date %></h2>
 <div>
-    <% @movie.genres.each do |genre|  %>
-   Genre: <%= genre.name %>
-    <%end%>
-
+    <%= youtube_video @movie.preview %>
 </div>
+<div>
+    <h5>Genres:</h5>
+    <ul>
+        <% @movie.genres.each do |genre|  %>
+            <li><%= link_to genre.name, genre_path(genre) %></li>
+        <%end%>
+    </ul>
+    <h5>Directed by <%= @movie.director %></h5><br>
+    <h5>Starring <%= @movie.actors %></h5><br>
+    <h5>Description:</h5><p> <%= @movie.description %></p><br>
+</div>
+
+<% if User.find_by(id: session[:user_id]).role == "admin" %>
+
+    <%= link_to "Edit Movie", edit_movie_path(@movie)%>
+<%end%>

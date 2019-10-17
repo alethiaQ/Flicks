@@ -1,7 +1,17 @@
 <img src="<%= @user.image %>"><h1>Hello, <%= @user.name %> </h1>
 <!-- browse movies logout and edit favorites should b in navbar -->
-<%= link_to "Browse Movies", movies_path %>
+<%= link_to "Edit Favorite Genres", edit_user_path(@user) %>
 
+<% @user.genres.each do |genre| %>
+    <div><h2><%= genre.name %></h3>
+    <% genre.movies.each do |movie| %>
+      <li><%= link_to movie.title, movie_path(movie)%><h6>Release date- <%= movie.release_date %></h6></li>
+       <%= youtube_video movie.preview %><br> 
+    <%end%>
+    <br>
+</div>
+
+<%end%>
 
 
 

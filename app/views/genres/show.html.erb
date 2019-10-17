@@ -1,0 +1,9 @@
+<h1><%= @genre.name %></h1>
+<ul>
+    <% @genre.movies.each do |movie| %>
+        <h3><%= link_to movie.title, movie_path(movie) %></h3> 
+        <li><%= movie.release_date %></li> 
+        <li><%= youtube_video movie.preview %></li>
+    <%end%>
+
+</ul>

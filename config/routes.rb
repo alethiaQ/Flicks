@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   post "/login" => "sessions#create"
   post "/logout" => "sessions#destroy"
   resources :users, only: [:show, :new, :create, :edit, :update, :destroy]
+  resources :genres, only: [:index, :show]
 end

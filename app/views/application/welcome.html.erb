@@ -1,12 +1,8 @@
 <h1>Welcome to Flicks</h1>
 
-<% if @user %>
-  <h1><img src="<%= @user.image %>"><%= @user.name %></h1>
-  <p>Email: <%= @user.email %></p>
-  <!--<h2>Facebook UID: <%= @user.uid %></h2> -->
-  <% else %>
-  <p>New User? <%= link_to "Sign Up", new_user_path %></p>
-  <p> <%= link_to "Log in", login_path %></p>
+  <div>
+    <h4>What is Flicks? </h4>
+      <p>Flicks is an application for ALL movie lovers. We make sure you don't miss out on new movies by providing you with latest trailers and release information. All you have to do is choose what kind of films you are into and we take care of the rest. If you haven't joined the party already, <%= link_to "sign up now", new_user_path %>!</p>
+  </div>
 
 
-<% end %>
