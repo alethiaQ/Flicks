@@ -8,12 +8,6 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     @user.build_user_genres(params)
 
-    #params[:user][:genres].each do |genre|
-    #if !genre.empty?
-    # @user.user_genres.build(:genre_id => genre)
-    # end
-    #end
-
     if @user.save
       session[:user_id] = @user.id
       redirect_to @user
@@ -27,12 +21,12 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
     @genres = Genre.all
   end
 
   def update
-    @user = User.find(params[:user_id])
+    @user = User.find(params[:id])
 
     @user.update(user_params) unless !@user.save
     redirect_to @user

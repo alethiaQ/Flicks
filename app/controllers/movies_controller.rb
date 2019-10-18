@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :logged_in?
-  before_action :admin_only, :except => [:show, :index]
+  #before_action :admin_only, :except => [:show, :index]
 
   def index
     @movies = Movie.all
@@ -57,9 +57,9 @@ class MoviesController < ApplicationController
     params.require(:movie).permit(:title, :description, :preview, :actors, :director, :genres, :release_date)
   end
 
-  def admin_only
-    unless current_user.role == "admin"
-      redirect_to root_path, :alert => "Access denied."
-    end
-  end
+  # def admin_only
+  #   unless current_user.role == "admin"
+  #     redirect_to root_path, :alert => "Access denied."
+  #   end
+  # end
 end

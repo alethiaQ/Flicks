@@ -1,12 +1,14 @@
 class User < ActiveRecord::Base
   enum role: [:user, :admin]
   after_initialize :set_default_role, :if => :new_record?
-  has_secure_password
+
   has_many :user_genres
   has_many :genres, through: :user_genres
-  has_many :movies, through: :genres
+  has_many :user_movies
+  has_many :movies, through: :user_movies
   validates :name, :email, presence: true
   validates :email, uniqueness: true
+  has_secure_password
 
   def set_default_role
     self.role ||= :user

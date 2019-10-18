@@ -17,7 +17,3 @@
     <h5>Description:</h5><p> <%= @movie.description %></p><br>
 </div>
 
-<% if User.find_by(id: session[:user_id]).role == "admin" %>
-
-    <%= link_to "Edit Movie", edit_movie_path(@movie)%>
-<%end%>

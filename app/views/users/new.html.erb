@@ -1,4 +1,6 @@
-  
+  <%= render partial: 'errors'%>
+
+
 <%= form_for @user do |f| %>
   <%= link_to('Log in with Facebook!', '/auth/facebook') %>
   <div><%= f.label :name %>
