@@ -4,10 +4,10 @@ class User < ActiveRecord::Base
 
   has_many :user_genres
   has_many :genres, through: :user_genres
-  has_many :user_movies
-  has_many :movies, through: :user_movies
+
+  has_many :movies
   validates :name, :email, presence: true
-  validates :email, uniqueness: true
+  validates :email, uniqueness: true, :if => :new_record?
   has_secure_password
 
   def set_default_role
@@ -15,9 +15,11 @@ class User < ActiveRecord::Base
   end
 
   def build_user_genres(params)
+    @user = User.find_by(email: params[:user][:email])
     params[:user][:genres].each do |genre|
       if !genre.empty?
         @user.user_genres.build(:genre_id => genre)
+        @user.save
       end
     end
   end

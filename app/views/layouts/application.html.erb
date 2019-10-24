@@ -14,7 +14,7 @@
       <%= link_to "Home", root_path %>
       <% if session[:user_id] %>
         <%= link_to "My Account", user_path(session[:user_id])%>
-        <%= link_to "Movies", movies_path%>
+        <%= link_to "Browse Movies", movies_path %>
         <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
           <input type=submit value='logout'>
         <% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_17_223621) do
+ActiveRecord::Schema.define(version: 2019_10_22_233440) do
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 2019_10_17_223621) do
     t.string "actors"
     t.string "director"
     t.string "release_date"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_movies_on_user_id"
   end
 
   create_table "movies_genres", force: :cascade do |t|
@@ -39,14 +41,6 @@ ActiveRecord::Schema.define(version: 2019_10_17_223621) do
     t.index ["user_id"], name: "index_user_genres_on_user_id"
   end
 
-  create_table "user_movies", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "movie_id", null: false
-    t.integer "rating"
-    t.index ["movie_id"], name: "index_user_movies_on_movie_id"
-    t.index ["user_id"], name: "index_user_movies_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
@@ -57,10 +51,9 @@ ActiveRecord::Schema.define(version: 2019_10_17_223621) do
     t.string "uid"
   end
 
+  add_foreign_key "movies", "users"
   add_foreign_key "movies_genres", "genres"
   add_foreign_key "movies_genres", "movies"
   add_foreign_key "user_genres", "genres"
   add_foreign_key "user_genres", "users"
-  add_foreign_key "user_movies", "movies"
-  add_foreign_key "user_movies", "users"
 end

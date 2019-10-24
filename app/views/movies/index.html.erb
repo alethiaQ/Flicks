@@ -1,9 +1,24 @@
-<h1> All Movies </h1>
+<h1> Browse Movies </h1>
+
+<div>
+<h4>Browse Movies by: </h4>
+    <%= form_tag("/movies", method: "get") do %>
+       <p>Genre: </p> <%= select_tag "genre", options_from_collection_for_select(@genres, "name", "name"), include_blank: true %>
+      <p>Upcoming movies only <%= check_box_tag "date"%> </p><br>
+    <%= submit_tag "Filter" %>
+    <%end%>
+</div>
+
+<% if @search_genre%>
+    <h1><%= @search_genre%> Movies</h1>
+<%end%>
 
 
 <% @movies.each do |movie| %>
 <div>
-<h3><%= link_to movie.title, movie_path(movie) %></h3><br> <%= youtube_video movie.preview %>
+<h3><%= link_to movie.title, movie_path(movie) %></h3><br> 
+
+<%= youtube_video movie.preview if movie.preview %>
 <%end%>
 </div>
 

@@ -3,7 +3,9 @@
 <h1><%= @movie.title %></h1>
 <h2>In theaters <%= @movie.release_date %></h2>
 <div>
+    <% if @movie.preview != "" && @movie.preview != nil%>
     <%= youtube_video @movie.preview %>
+    <%end%>
 </div>
 <div>
     <h5>Genres:</h5>
@@ -15,5 +17,8 @@
     <h5>Directed by <%= @movie.director %></h5><br>
     <h5>Starring <%= @movie.actors %></h5><br>
     <h5>Description:</h5><p> <%= @movie.description %></p><br>
-</div>
 
+</div>
+<% if is_user_movie?(@movie) %>
+    <%= link_to "Edit Movie", edit_user_movie_path(@movie.user, @movie)%>
+<%end%>

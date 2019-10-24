@@ -1,22 +1,23 @@
 <div>
     <%= form_for(@movie) do |m| %>
+    <%= m.hidden_field :user_id %>
         <%= m.label "Title" %>
         <%= m.text_field :title%><br><br>
          <%= m.label "Description" %>
         <%= m.text_area :description %><br>
-        <%= m.label "Trailer" %>
+        <%= m.label "Trailer URL" %>
         <%= m.text_field :preview %><br>
         <%= m.label "Actors" %>
         <%= m.text_field :actors %><br>
         <%= m.label "Director" %>
         <%= m.text_field :director %><br>
-        <%= m.label "Release Date" %>
+        <%= m.label "Release Date (Nov 14, 2020)" %>
         <%= m.text_field :release_date %><br>
         <% @genres.each do |genre| %>
             <%= check_box_tag "movie[genres][]", genre.id, @movie.genres.include?(genre.id) %>
             <%= genre.name%><br>
             <%end%>
-        <%= m.submit %>
+        <%= m.submit "create" %>
      <%end%>
 
 

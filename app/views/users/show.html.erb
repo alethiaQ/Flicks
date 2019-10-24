@@ -1,17 +1,33 @@
 <img src="<%= @user.image %>"><h1>Hello, <%= @user.name %> </h1>
 <!-- browse movies logout and edit favorites should b in navbar -->
 <%= link_to "Edit Favorite Genres", edit_user_path(@user) %>
+<%= link_to "Add Movie to your collection", new_user_movie_path(@user) %>
 
+
+<div>
+<h1>Upcoming Movies You May Like </h1>
 <% @user.genres.each do |genre| %>
-    <div><h2><%= genre.name %></h3>
+    
+    <h2><%= genre.name %></h3>
     <% genre.movies.each do |movie| %>
-      <li><%= link_to movie.title, movie_path(movie)%><h6>Release date- <%= movie.release_date %></h6></li>
+      <%if movie.release_date.to_date > Date.today && movie.release_date != nil%>
+        <li><%= link_to movie.title, movie_path(movie)%><h6>Release date- <%= movie.release_date %></h6></li>
        <%= youtube_video movie.preview %><br> 
+      <%end%>
     <%end%>
     <br>
 </div>
-
 <%end%>
+
+<div>
+
+<% if !@user.movies.empty?%>
+<h1>Your Movies: </h1>
+<% @user.movies.each do |movie| %>
+  <li><%= link_to movie.title, movie_path(movie)%></li>
+<%end%>
+<%end%>
+</div>
 
 
 
