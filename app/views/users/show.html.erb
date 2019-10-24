@@ -1,30 +1,36 @@
-<img src="<%= @user.image %>"><h1>Hello, <%= @user.name %> </h1>
+
+<img src="<%= @user.image %>" class="img-thumbnail">
+
+<h1>Hello, <%= @user.name %> </h1>
 <!-- browse movies logout and edit favorites should b in navbar -->
-<%= link_to "Edit Favorite Genres", edit_user_path(@user) %>
-<%= link_to "Add Movie to your collection", new_user_movie_path(@user) %>
+<div class="container is-grouped">
+<button class="button is-focused"><%= link_to "Edit Favorite Genres", edit_user_path(@user) %></button>
+<button class="button is-focused"><%= link_to "Add Movie to your collection", new_user_movie_path(@user) %></button>
+</div>
 
 
-<div>
+<div class="container">
 <h1>Upcoming Movies You May Like </h1>
 <% @user.genres.each do |genre| %>
     
     <h2><%= genre.name %></h3>
     <% genre.movies.each do |movie| %>
       <%if movie.release_date.to_date > Date.today && movie.release_date != nil%>
-        <li><%= link_to movie.title, movie_path(movie)%><h6>Release date- <%= movie.release_date %></h6></li>
+        <button class="button is-focused"><%= link_to movie.title, movie_path(movie)%></button>
+        <h6>Release date- <%= movie.release_date %></h6>
        <%= youtube_video movie.preview %><br> 
       <%end%>
     <%end%>
     <br>
-</div>
-<%end%>
 
-<div>
+<%end%>
+</div>
+<div class="container">
 
 <% if !@user.movies.empty?%>
 <h1>Your Movies: </h1>
 <% @user.movies.each do |movie| %>
-  <li><%= link_to movie.title, movie_path(movie)%></li>
+  <button class="button is-focused"><%= link_to movie.title, movie_path(movie)%></button>
 <%end%>
 <%end%>
 </div>

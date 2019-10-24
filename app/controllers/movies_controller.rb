@@ -8,7 +8,7 @@ class MoviesController < ApplicationController
     @genres = Genre.all
     if !params[:genre].blank?
       @movies = Movie.by_genre(params[:genre])
-      @search_genre = params[:genre]
+      @search_genre = params[:genre] #MVC, used for styling page
     elsif params[:date] != nil
       @movies = Movie.upcoming_movies
     else

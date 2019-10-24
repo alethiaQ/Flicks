@@ -1,6 +1,6 @@
 <h1> Browse Movies </h1>
 
-<div>
+<div class="container">
 <h4>Browse Movies by: </h4>
     <%= form_tag("/movies", method: "get") do %>
        <p>Genre: </p> <%= select_tag "genre", options_from_collection_for_select(@genres, "name", "name"), include_blank: true %>

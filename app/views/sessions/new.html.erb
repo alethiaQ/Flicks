@@ -1,13 +1,20 @@
+<body class="text-center">
+
+<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 <%= form_for @user do |f|%>
-<%= f.label :email %>
-  <%= f.text_field :email %>
- 
+  <div class="">
+  <%= f.label :email%>
+  <%= f.text_field :email%>
+ </div>
+
 
   <%= f.label :password %>
   <%= f.password_field :password %>
-
+  
   <%= f.submit "log in" %>
   or 
   
   <%= link_to('Log in with Facebook!', '/auth/facebook') %>
   <%end%>
+
+</body>

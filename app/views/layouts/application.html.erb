@@ -4,31 +4,70 @@
     <title>Flicks</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   </head>
 
   <body>
-    <nav>
-      <%= link_to "Home", root_path %>
-      <% if session[:user_id] %>
-        <%= link_to "My Account", user_path(session[:user_id])%>
-        <%= link_to "Browse Movies", movies_path %>
-        <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
-          <input type=submit value='logout'>
-        <% end %>
-
-      <% else %>
-        <%= link_to "Sign In", login_path%>
-        <%= link_to "Create Account", new_user_path %>
-      <%end%>
 
 
-    
-    
+  <header class="header">
+    <div class="container">
+      <nav class="level">
+       <div class="level-left">
+        <div class="level-item">
+          <p class="subtitle is-5">Flicks</p>
+        </div>
+      </div>
+
+      <div class="level-right is-grouped">
+        <p class="level-item">
+          <button class="button">
+            <%= link_to "Home", root_path %> 
+          </button>
+        </p>
+        <% if session[:user_id] %>
+          <p class="level-item">
+            <button class="button"><%= link_to "My Account", user_path(session[:user_id])%></button>
+          </p>
+          <p class="level-item">
+            <button class="button"><%= link_to "Browse Movies", movies_path %> </button>
+          </p>
+
+          <p class="level-item">
+            <div class="control">
+ 
+            <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
+             <button class="button is-link"> <input type=submit value='logout'></button>
+            <% end %>
+            </div>
+          </p>
+           
+        <% else %>
+          <p class="level-item">
+             <button class="button"><%= link_to "Sign In", login_path %></button>
+          </p>
+          <p class="level-item">
+             <button class="button"><%= link_to "Create Account", new_user_path %></button>
+          </p>
+        <%end%>
+        
+      </div>
     </nav>
-  
+  </div>
+</header>
+<section class="section">
+  <div class="container">
     <%= yield %>
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    Copyright © 2019 Flicks. All rights reserved.
+  </div>
+</footer>
   </body>
 </html>
