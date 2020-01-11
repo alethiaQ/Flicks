@@ -1,39 +1,57 @@
+<div>
+  <div class="ui attached segment">
+  <div class="ui olive card">
+    <div class="header">
+      <div class="ui avatar image">
+        <img src="<%= @user.image %>">
+      </div>
+      <%= @user.name %>
+    </div>
+    <div class="content"> 
+      <div class="ui list">
+        <div class="item">
+          <i class="edit icon"></i>
+          <%= link_to "Edit Fav-Genres", edit_user_path(@user) %>
+        </div>
+        <div class="item"> 
+          <i class="upload icon"></i>
+          <%= link_to "Add Movie to your collection", new_user_movie_path(@user) %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<img src="<%= @user.image %>" class="img-thumbnail">
-
-<h1>Hello, <%= @user.name %> </h1>
 <!-- browse movies logout and edit favorites should b in navbar -->
-<div class="container is-grouped">
-<button class="button is-focused"><%= link_to "Edit Favorite Genres", edit_user_path(@user) %></button>
-<button class="button is-focused"><%= link_to "Add Movie to your collection", new_user_movie_path(@user) %></button>
-</div>
 
-
-<div class="container">
-<h1>Upcoming Movies You May Like </h1>
-<% @user.genres.each do |genre| %>
-    
-    <h2><%= genre.name %></h3>
+  <div class="ui fluid raised text container segment">
+  <div class="ui small feed">
+   <h2 class="ui header">Upcoming Movies You May Like </h2>
+    <% @user.genres.each do |genre| %>
+   
+    <h5><%= genre.name %></h5>
     <% genre.movies.each do |movie| %>
-      <%if movie.release_date.to_date > Date.today && movie.release_date != nil%>
-        <button class="button is-focused"><%= link_to movie.title, movie_path(movie)%></button>
-        <h6>Release date- <%= movie.release_date %></h6>
-       <%= youtube_video movie.preview %><br> 
+      <%if movie.release_date != nil%>
+      <%# <%if movie.release_date.to_date > Date.today && movie.release_date != nil%> 
+        <div class="item">
+          <div class="ui header">
+            <%= link_to movie.title, movie_path(movie)%>
+          </div>
+          <div class="ui meta item">Release date- <%= movie.release_date %></div>
+        <%= youtube_video movie.preview %> 
       <%end%>
+      </div>
     <%end%>
-    <br>
-
-<%end%>
-</div>
-<div class="container">
-
-<% if !@user.movies.empty?%>
-<h1>Your Movies: </h1>
-<% @user.movies.each do |movie| %>
-  <button class="button is-focused"><%= link_to movie.title, movie_path(movie)%></button>
-<%end%>
-<%end%>
-</div>
+    <%end%>
+    <% if !@user.movies.empty?%>
+    <h2 class="ui header">Your Movies: </h2>
+    <% @user.movies.each do |movie| %>
+      <button ><%= link_to movie.title, movie_path(movie)%></button>
+    <%end%>
+  <%end%>
+  </div>
+  </div>
+  </div>
+</div >
 
 
 
